@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  	<link rel="stylesheet" href="css/bootstrap.min.css">
+    <title>Load Past Events</title>
+  
+</head>
+<body>
+    <div class="containers mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h2>Past Meetups By GDG Jalandhar</h2><br><hr><br>
+                    <p class="text-muted" style="padding-left: 5%; padding-right: 5%">Google Developers Group Jalandhar is an initiative to concentrate the efforts of many developers in and around Punjab <br>to learn, share and get productive using the various Google products.</p><br>
+                    <button class="btn btn-primary " id="button">Load Past Meetups</button><hr>
+                </div>
+            </div>
+        </div>
+        <div class="container mt-3">
+            <div class="row" id="events"> 
+            </div>
+        </div>
+        <br>
+        <footer class="page-footer text-center">
+            <div class="container">
+                <div class="text-muted">
+                    Follow us:
+                    <a href="https://meetup.com/GDG-Jalandhar" target= "_blank">Meetup</a>
+                    <a href="https://facebook.com/GDGJalandhar" target= "_blank">Facebook</a>
+                    <a href="https://instagram.com/GDGJalandhar" target= "_blank">Instagram</a><br>
+            <div class="footer-copyright py-3" id="footer_data">© 2019 Copyright:
+                <a href="https://gdgjalandhar.com" target="_blank"> GDG Jalandhar</a>
+            </div>
+            </div>
+        </div>
+        </footer>
+    </div>
+
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+        document.getElementById('button').addEventListener('click', loadEvents);
+        function loadEvents() {
+            fetch('https://cors.io/?https://api.meetup.com/GDG-Jalandhar/events?photo-host=public&page=20&sig_id=225657600&status=past&sig=63d9475bd43b35e91b46b4ef6682ecd846094015')
+            .then(events => events.json())
+            .then(events => {
+                var events_data = '';
+                for(var event in events){
+                    events_data += `
+                    <div class="col-md-4 p-2">
+                        <div class="card" style="min-height:220px; max-height:220px;" >
+                            <div class="card-body">
+                                <p class="card-body text-muted"><b> ${events[event].name}</b><br>
+                                    Date & Time: ${events[event].local_date}&nbsp;${events[event].local_time}
+                                    <br>
+                                    Venue: ${events[event].venue.name}
+                                </p>
+                                <a href="${events[event].link}" target="_blank" class="btn btn-primary">Event Detail</a>
+                            </div>
+                        </div>
+                    </div>
+                    `
+                }
+                document.getElementById('events').innerHTML = events_data;
+            })
+        }
+    </script>    
+</body>
+</html>
