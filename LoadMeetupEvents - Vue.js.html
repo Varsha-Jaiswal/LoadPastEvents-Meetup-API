@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="vue.js/vue.js"></script>
+  	<link rel="stylesheet" href="css/bootstrap.min.css">
+    <title>Load Past Events</title>
+</head>
+<body>
+    <div id="load-events-app">
+        <div class="containers mt-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <h2>Past Meetups By GDG Jalandhar</h2><br><hr><br>
+                        <p class="text-muted" style="padding-left: 5%; padding-right: 5%">Google Developers Group Jalandhar is an initiative to concentrate the efforts of many developers in and around Punjab <br>to learn, share and get productive using the various Google products.</p><br>
+                        <button class="btn btn-primary " v-on:click="loadEvents">Load Past Meetups</button><hr>
+                    </div>
+                </div>
+            </div>
+            <div class="container mt-3">
+                <div class="row"> 
+                        <div class="col-md-4 p-2" v-for="event in events">
+                            <div class="card" style="min-height:220px; max-height:220px;" >
+                                <div class="card-body">
+                                    <p class="card-body text-muted"><b> {{ event.name }}</b><br>
+                                        Date & Time: {{ event.local_date }}&nbsp;{{ event.local_time }}
+                                        <br>
+                                        Venue: {{ event.venue.name }}
+                                    </p>
+                                    &nbsp;&nbsp;&nbsp;
+                                    <a v-bind:href="event.link" target="_blank" class="btn btn-primary">Event Detail</a>
+                                </div>
+                            </div>
+                        </div>
+                                   
+                </div>
+            </div>
+            <br>
+        </div>
+        <div class="container">
+            <footer class="page-footer text-center">
+                <div class="container">
+                    <div class="text-muted">
+                        Follow us:
+                        <a href="https://meetup.com/GDG-Jalandhar" target= "_blank">Meetup</a>
+                        <a href="https://facebook.com/GDGJalandhar" target= "_blank">Facebook</a>
+                        <a href="https://instagram.com/GDGJalandhar" target= "_blank">Instagram</a><br>
+                <div class="footer-copyright py-3">© 2019 Copyright:
+                    <a href="https://gdgjalandhar.com" target="_blank"> GDG Jalandhar</a>
+                </div>
+                </div>
+            </div>
+            </footer>
+        </div>
+    </div>
+    <script src = "main.js"></script>
+</body>
+</html>
